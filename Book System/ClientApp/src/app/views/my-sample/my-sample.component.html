@@ -1,0 +1,18 @@
+<h1>{{myName}}</h1>
+
+
+<div class="panel">
+    <div class="panel-heading">   
+        What is your name?</div>
+     
+    <div class="panel-body">
+        <div class="jumbotron">
+            <label for="">Name:</label>
+                <input type="text" class="form-control" [(ngModel)]="yourName" 
+                (keyup.enter)="submitYourName()" placeholder="Enter your name">
+            <div>
+                <h1 *ngIf="yourNameResponse">{{yourNameResponse}}</h1>
+            </div>
+        </div>
+    </div>
+</div>

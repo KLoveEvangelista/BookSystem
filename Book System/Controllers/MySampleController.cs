@@ -16,7 +16,7 @@ namespace Book_System.Controllers
         [HttpGet("[action]")]
         public ActionResult<MyResponse> MyName()
         {
-            return Ok(new MyResponse { IsSuccess = true, Message = "Hi! I'm John Rey" });
+            return Ok(new MyResponse { IsSuccess = true, Message = "Hi! I'm K Love" });
         }
 
         // api/MySample/YourName/{name}
