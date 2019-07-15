@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using BookSys.DAL.Models;
 
 namespace Book_System.Controllers
 {
@@ -11,14 +12,24 @@ namespace Book_System.Controllers
     [ApiController]
     public class MySampleController : Controller
     {
-
+        private readonly BookSysContext _context;
+        public MySampleController(BookSysContext context)
+        {
+            _context = context;
+        }
         // api/MySample/MyName (case insensitive)
         [HttpGet("[action]")]
         public ActionResult<MyResponse> MyName()
         {
             return Ok(new MyResponse { IsSuccess = true, Message = "Hi! I'm K Love" });
+            
         }
-
+        //api/MySample/Getbooks
+        [HttpGet("[action]")]
+        public ActionResult<IEnumerable<Book>> GetBooks()
+        {
+            return _context.Books.ToList();
+        }
         // api/MySample/YourName/{name}
         [HttpGet("[action]/{name}")]
         public ActionResult<MyResponse> YourName(string name)
@@ -79,4 +90,5 @@ namespace Book_System.Controllers
             public string Message { get; set; }
         }
     }
+       
 }

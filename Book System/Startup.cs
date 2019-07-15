@@ -1,8 +1,10 @@
+using BookSys.DAL.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,6 +29,12 @@ namespace Book_System
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddDbContext<BookSysContext>
+                (options =>
+                    options.UseSqlServer
+                    (Configuration.GetConnectionString
+                    ("BookSysContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

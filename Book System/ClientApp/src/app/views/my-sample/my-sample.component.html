@@ -1,18 +1,50 @@
 <h1>{{myName}}</h1>
 
-
 <div class="panel">
-    <div class="panel-heading">   
-        What is your name?</div>
-     
+    <div class="panel-heading">
+        What is your name?
+    </div>
     <div class="panel-body">
         <div class="jumbotron">
             <label for="">Name:</label>
-                <input type="text" class="form-control" [(ngModel)]="yourName" 
-                (keyup.enter)="submitYourName()" placeholder="Enter your name">
+            <input type="text" class="form-control" [(ngModel)]="yourName" (keyup.enter)="submitYourName()" placeholder="Enter your name">
             <div>
                 <h1 *ngIf="yourNameResponse">{{yourNameResponse}}</h1>
             </div>
         </div>
     </div>
+</div>
+
+<div class="panel">
+    <div class="panel-heading">
+        <h1>Name Age Checker</h1>
+    </div>
+    <div class="panel-body">
+        <form (ngSubmit)="formSubmit()" method="post" [formGroup]="sampleCreateForm">
+            <div class="row">
+                <div class="col-md-5">
+                    <label>Name: <span style="color:red;">*</span></label>
+                    <input type="text" class="form-control" formControlName="name" [ngClass]="{'is-invalid': (f.name.touched && f.name.errors) || nameBackEndErrors}">
+                    <div *ngIf="f.name.touched && f.name.errors">
+                        <span class="error-msg">This field is required</span>
+                    </div>
+                    <div>
+                        <span *ngFor="let error of nameBackEndErrors" class="error-msg">{{error}}</span>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <label>Age: <span style="color:red;">*</span></label>
+                    <input type="number" class="form-control" formControlName="age" [ngClass]="{'is-invalid': (f.age.touched && f.age.errors) || ageBackEndErrors}">
+                    <div *ngIf="f.age.touched &&f.age.errors">
+                        <span class="error-msg">This field is required</span>
+                    </div>
+                    <div>
+                        <span *ngFor="let error of ageBackEndErrors" class="error-msg">{{error}}</span>
+                    </div>
+                </div>
+                <button class="col-md-2 btn btn-primary" [disabled]="!sampleCreateForm.valid || isSubmit">Check now</button>
+            </div>
+        </form>
+    </div>
+
 </div>
