@@ -1,0 +1,14 @@
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\bin\Debug\netcoreapp2.2\BookSys.BLL.deps.json
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\bin\Debug\netcoreapp2.2\BookSys.BLL.dll
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\bin\Debug\netcoreapp2.2\BookSys.BLL.pdb
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\bin\Debug\netcoreapp2.2\BookSys.DAL.dll
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\bin\Debug\netcoreapp2.2\BookSys.VeiwModel.dll
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\bin\Debug\netcoreapp2.2\BookSys.DAL.pdb
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\bin\Debug\netcoreapp2.2\BookSys.VeiwModel.pdb
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\obj\Debug\netcoreapp2.2\BookSys.BLL.csprojAssemblyReference.cache
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\obj\Debug\netcoreapp2.2\BookSys.BLL.csproj.CoreCompileInputs.cache
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\obj\Debug\netcoreapp2.2\BookSys.BLL.AssemblyInfoInputs.cache
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\obj\Debug\netcoreapp2.2\BookSys.BLL.AssemblyInfo.cs
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\obj\Debug\netcoreapp2.2\BookSys.BLL.csproj.CopyComplete
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\obj\Debug\netcoreapp2.2\BookSys.BLL.dll
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.BLL\obj\Debug\netcoreapp2.2\BookSys.BLL.pdb

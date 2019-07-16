@@ -1,3 +1,4 @@
+using BookSys.BLL.Services;
 using BookSys.DAL.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,8 @@ namespace Book_System
                     options.UseSqlServer
                     (Configuration.GetConnectionString
                     ("BookSysContext")));
+            //add services in BookSys.BLL
+            services.AddScoped<BookService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

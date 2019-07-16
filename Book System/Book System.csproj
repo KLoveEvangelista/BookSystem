@@ -27,7 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BookSys.BLL\BookSys.BLL.csproj" />
     <ProjectReference Include="..\BookSys.DAL\BookSys.DAL.csproj" />
+    <ProjectReference Include="..\BookSys.VeiwModel\BookSys.VeiwModel.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

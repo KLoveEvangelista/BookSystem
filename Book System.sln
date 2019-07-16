@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book System", "Book System\Book System.csproj", "{64930363-3B1D-483B-A1BA-8E7650004E28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSys.DAL", "BookSys.DAL\BookSys.DAL.csproj", "{AF2CB67A-BA51-48CC-A6A1-E31FC61F9303}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookSys.DAL", "BookSys.DAL\BookSys.DAL.csproj", "{AF2CB67A-BA51-48CC-A6A1-E31FC61F9303}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSys.BLL", "BookSys.BLL\BookSys.BLL.csproj", "{6ED6A0D0-43DB-4BD1-8286-8B3B3115D7F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSys.VeiwModel", "BookSys.VeiwModel\BookSys.VeiwModel.csproj", "{1BC1387D-16E6-4FEF-9CFD-63CE2492AD7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{AF2CB67A-BA51-48CC-A6A1-E31FC61F9303}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF2CB67A-BA51-48CC-A6A1-E31FC61F9303}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF2CB67A-BA51-48CC-A6A1-E31FC61F9303}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ED6A0D0-43DB-4BD1-8286-8B3B3115D7F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ED6A0D0-43DB-4BD1-8286-8B3B3115D7F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ED6A0D0-43DB-4BD1-8286-8B3B3115D7F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ED6A0D0-43DB-4BD1-8286-8B3B3115D7F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BC1387D-16E6-4FEF-9CFD-63CE2492AD7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BC1387D-16E6-4FEF-9CFD-63CE2492AD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BC1387D-16E6-4FEF-9CFD-63CE2492AD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BC1387D-16E6-4FEF-9CFD-63CE2492AD7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
