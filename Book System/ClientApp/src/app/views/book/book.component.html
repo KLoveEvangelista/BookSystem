@@ -1,0 +1,19 @@
+<app-book-add-form></app-book-add-form>
+<app-book-edit-form></app-book-edit-form>
+<p>book works!</p>
+
+<h1>Books</h1>
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <td>Title</td>
+            <td>Copyright</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let book of books">
+            <td>{{book.title}}</td>
+            <td>{{book.copyright}}</td>
+        </tr>
+    </tbody>
+</table>

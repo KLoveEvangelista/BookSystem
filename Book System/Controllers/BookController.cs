@@ -21,7 +21,7 @@ namespace Book_System.Controllers
         }
 
         //api/Book/Create
-        [HttpPost("action")]
+        [HttpPost("[action]")]
         public ActionResult<ResponseVM> Create([FromBody]BookVM bookVM)
         {
             if (!ModelState.IsValid)
@@ -46,7 +46,7 @@ namespace Book_System.Controllers
         }
         
         //api/Book/getSingleBy/id
-        [HttpGet("[action]/id")]
+        [HttpGet("[action]/{id}")]
         public BookVM GetSingleBy(long id)
         {
             return bookService.GetSingleBy(id);
@@ -54,7 +54,7 @@ namespace Book_System.Controllers
         }
 
         //api/Book/Update
-        [HttpPut("action")]
+        [HttpPut("[action]/{id}")]
         public ActionResult<ResponseVM> Update ([FromBody]BookVM bookVM)
         {
             if (!ModelState.IsValid)

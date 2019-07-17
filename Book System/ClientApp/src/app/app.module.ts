@@ -11,6 +11,9 @@ import { CounterComponent } from './views/counter/counter.component';
 import { FetchDataComponent } from './views/fetch-data/fetch-data.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MySampleComponent } from './views/my-sample/my-sample.component';
+import { BookComponent } from './views/book/book.component';
+import { BookAddFormComponent } from './views/book/book-add-form/book-add-form.component';
+import { BookEditFormComponent } from './views/book/book-edit-form/book-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { MySampleComponent } from './views/my-sample/my-sample.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    MySampleComponent
+    MySampleComponent,
+    BookComponent,
+    BookAddFormComponent,
+    BookEditFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

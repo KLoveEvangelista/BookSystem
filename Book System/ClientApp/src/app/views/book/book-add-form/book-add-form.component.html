@@ -1,0 +1,18 @@
+<div class="panel">
+    <div class="panel-heading">
+        <h1></h1>
+    </div>
+    <div class="div panel-body">
+        <div class="jumbotron"></div>
+    </div>
+</div>
+
+
+<form (ngSubmit)= "onFormSubmit()" method="POST" [formGroup]="bookCreateForm">
+    <input type="text" formControlName="title" class="form-control" placeholder="Title">
+    <br>
+    <input type="number" formControlName="copyright" class="form-control" placeholder="Copyright">
+    <br>
+    <button type="submit" [disabled]="!bookCreateForm.valid || isSubmit"> Create</button>
+
+</form>
