@@ -27,7 +27,9 @@ export class BookAddFormComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
+  get f(){return this.bookCreateForm.controls;}
 
   async onFormSubmit(){
     let ok = confirm("Are you sure you want to submit?")

@@ -54,7 +54,7 @@ namespace Book_System.Controllers
         }
 
         //api/Book/Update
-        [HttpPut("[action]/{id}")]
+        [HttpPut("[action]")]
         public ActionResult<ResponseVM> Update ([FromBody]BookVM bookVM)
         {
             if (!ModelState.IsValid)

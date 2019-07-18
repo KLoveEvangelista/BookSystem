@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/models/book.model';
 import { BookService } from 'src/app/services/book.service';
 import { BookDataService } from 'src/app/dataservices/book.dataservice';
+import { TouchSequence } from 'selenium-webdriver';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { BookEditFormComponent } from './book-edit-form/book-edit-form.component';
 
 @Component({
   selector: 'app-book',
@@ -13,7 +16,8 @@ export class BookComponent implements OnInit {
 
   constructor(
     private bookService: BookService,
-    private bookDataService: BookDataService) 
+    private bookDataService: BookDataService,
+    private dialog: MatDialog) 
     { }
     
 
@@ -33,5 +37,33 @@ export class BookComponent implements OnInit {
       console.log(error)
       alert('Something went wrong')
     }
+  }
+  async delete(id){
+    if(confirm('Are you sure you want to delete')){
+      try{
+        let result = await this.bookService.delete(id).toPromise()
+        if(result.isSuccess){
+          alert(result.message)
+          this.bookDataService.refreshBooks()
+        } else{
+          alert(result.message)
+        }     
+    } catch (error){
+      alert('Something went worng')
+      console.log(error)
+      }
+    }
+  }
+  update(book){
+    //instantiate dialog config object
+    const dialogConfig = new MatDialogConfig();
+    //add bookContext data of selected book
+    dialogConfig.data = {
+      bookContext: book
+    }
+
+    dialogConfig.width = '600px';
+
+    this.dialog.open(BookEditFormComponent, dialogConfig);
   }
 }

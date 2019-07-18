@@ -14,6 +14,9 @@ import { MySampleComponent } from './views/my-sample/my-sample.component';
 import { BookComponent } from './views/book/book.component';
 import { BookAddFormComponent } from './views/book/book-add-form/book-add-form.component';
 import { BookEditFormComponent } from './views/book/book-edit-form/book-edit-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -32,8 +35,11 @@ import { BookEditFormComponent } from './views/book/book-edit-form/book-edit-for
     HttpClientModule,
     FormsModule,
    ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
+  entryComponents: [BookEditFormComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

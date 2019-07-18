@@ -1,1 +1,45 @@
-<p>book-edit-form works!</p>
+<div class="panel">
+    <div class="panel-heading">
+        <h1 style="display: inline">Edit book</h1>
+        <button class="button btn btn-danger btn-sm float-right" (click)="close()"><i class="material-icons">close</i></button>
+    </div>
+    <div class="panel-body">
+        <div class="jumbotron">
+            <form (ngSubmit)= "onFormSubmit()" method="POST" [formGroup]="bookEditForm">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label>Title: <span style="color: red">*</span></label><br />
+                        <input type="text" class="form-control" formControlName="title" [ngClass]="{ 'is-invalid': (f.title.touched && f.title.errors) || titleBackEndErrors}"/>
+                        <div *ngIf="f.title.touched && f.title.errors" class="invalid-feedback">
+                            <div *ngIf="f.title.errors.required"><span class="error-msg">This field is required</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span *ngFor="let error of titleBackEndErrors" class="error-msg">{{error}}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-5">
+                            <label>Copyright: <span style="color: red">*</span></label><br />
+                            <input type="number" class="form-control" id="copyright"  formControlName="copyright" [ngClass]="{ 'is-invalid': (f.copyright.touched && f.copyright.errors) || copyrightBackEndErrors}"/>
+                            <div *ngIf="f.copyright.touched && f.copyright.errors"  class="invalid-feedback">
+                                <div *ngIf="f.copyright.errors.required "><span class="error-msg">This field is required</span>
+                                </div>
+                            </div>
+                            <div>
+                                <span *ngFor="let error of copyrightBackEndErrors" class="error-msge">{{error}}</span>
+                            </div>
+                    </div>
+
+                    <div class="col-md-2">
+                            <br />
+                            <button type="submit" class="btn btn-success" [disabled]="!bookEditForm.valid || isSubmit"> Edit </button>
+                    </div>
+                </div>                
+            </form>            
+        </div>
+    </div>
+</div>
+
+
+

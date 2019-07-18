@@ -1,19 +1,30 @@
 <app-book-add-form></app-book-add-form>
-<app-book-edit-form></app-book-edit-form>
+
 <p>book works!</p>
 
 <h1>Books</h1>
 <table class="table table-hover table-dark">
     <thead>
         <tr>
-            <td>Title</td>
-            <td>Copyright</td>
+            <td style="width: 50%">Title</td>
+            <td style="width: 30%">Copyright</td>
+            <td style="width: 20%"></td>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let book of books">
-            <td>{{book.title}}</td>
-            <td>{{book.copyright}}</td>
+            <td style="width: 50%">{{book.title}}</td>
+            <td style="width: 30%">{{book.copyright}}</td>
+            <td style="width: 20%">
+                <div class="row">
+                    <button class="col-md-5 btn btn-success m-1" (click)="update(book)" data-toggle="tooltip" data-placement="bottom" title="Update book" >
+                        <i class="material-icons">update</i>
+                    </button>
+                    <button class="col-md-5 btn btn-danger m-1" (click)="delete(book.id)" data-toggle="tooltip" data-placement="bottom" title="Delete Book">
+                        <i class="material-icons">delete</i></button>
+                </div>
+            </td>
+            
         </tr>
     </tbody>
 </table>
