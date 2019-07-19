@@ -7,7 +7,7 @@
         <div class="jumbotron">
             <form (ngSubmit)= "onFormSubmit()" method="POST" [formGroup]="bookEditForm">
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <label>Title: <span style="color: red">*</span></label><br />
                         <input type="text" class="form-control" formControlName="title" [ngClass]="{ 'is-invalid': (f.title.touched && f.title.errors) || titleBackEndErrors}"/>
                         <div *ngIf="f.title.touched && f.title.errors" class="invalid-feedback">
@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                             <label>Copyright: <span style="color: red">*</span></label><br />
                             <input type="number" class="form-control" id="copyright"  formControlName="copyright" [ngClass]="{ 'is-invalid': (f.copyright.touched && f.copyright.errors) || copyrightBackEndErrors}"/>
                             <div *ngIf="f.copyright.touched && f.copyright.errors"  class="invalid-feedback">
@@ -31,11 +31,36 @@
                             </div>
                     </div>
 
-                    <div class="col-md-2">
-                            <br />
-                            <button type="submit" class="btn btn-success" [disabled]="!bookEditForm.valid || isSubmit"> Edit </button>
+                    <div class="col-md-3">
+                            <label >Genre: <span style="color: red">*</span></label>
+                            <input type="text" formControlName="genreID" hidden>
+    
+                            <div>
+                                <input type="text" class="form-control" formControlName="genreSelect" (keyup)="selectGenre($event)"(click)="$event.target.select()" list="genresListss">
+                                <datalist class="ui-datalist-data" id="genresListss">
+                                    <option [ngValue]="null" disabled="true" [selected]="true"> Choose a genre 
+                                    <option id="{{genre.id}}" *ngFor="let genre of genresList" value="{{genre.name}}"> 
+                                </datalist>
+                                <div *ngIf="f.genreSelect.touched && f.genreSelect.errors" class="invalid-feedback">
+                                    <div *ngIf="f.genreSelect.errors.required">
+                                        <span class="error-msg"> This field is required</span>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
-                </div>                
+
+                    <div class="col-md-1">
+                            <br>
+                             <button class="btn btn-info btn-trans" type="button" (click)="openGenreDialog()" data-toggle="tool-tip" data-placement = "bottom" title="Add a new genre">
+                                 <i class="material-icons"> add</i>
+                             </button>
+                    </div>
+                </div>  
+                <div class="col-md-1">
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-success" [disabled]="!bookEditForm.valid || isSubmit"> Create</button>
+                </div>               
             </form>            
         </div>
     </div>

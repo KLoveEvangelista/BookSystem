@@ -16,6 +16,9 @@ import { BookAddFormComponent } from './views/book/book-add-form/book-add-form.c
 import { BookEditFormComponent } from './views/book/book-edit-form/book-edit-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material';
+import { GenreComponent } from './views/genre/genre.component';
+import { GenreAddFormComponent } from './views/genre/genre-add-form/genre-add-form.component';
+import { GenreEditFormComponent } from './views/genre/genre-edit-form/genre-edit-form.component';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import {MatDialogModule} from '@angular/material';
     MySampleComponent,
     BookComponent,
     BookAddFormComponent,
-    BookEditFormComponent
+    BookEditFormComponent,
+    GenreComponent,
+    GenreAddFormComponent,
+    GenreEditFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,7 +45,7 @@ import {MatDialogModule} from '@angular/material';
     BrowserAnimationsModule,
     MatDialogModule
   ],
-  entryComponents: [BookEditFormComponent],
+  entryComponents: [BookEditFormComponent, GenreEditFormComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

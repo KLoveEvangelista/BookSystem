@@ -1,0 +1,33 @@
+<p>genre-update-form works!</p>
+<div class="panel">
+    <div class="panel-heading">
+        <h1 style="display: inline">Edit Genre</h1>
+        <button class="button btn btn-danger btn-sm float-right" (click)="close()"><i class="material-icons">close</i></button>
+    </div>
+    <div class="panel-body">
+        <div class="jumbotron">
+            <form (ngSubmit)= "onFormSubmit()" method="POST" [formGroup]="genreEditForm">
+                <div class="row">
+                    <div class="col-md-9">
+                        <label>Title: <span style="color: red">*</span></label><br />
+                        <input type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid': (f.name.touched && f.name.errors) || nameBackEndErrors}"/>
+                        <div *ngIf="f.name.touched && f.name.errors" class="invalid-feedback">
+                            <div *ngIf="f.name.errors.required"><span class="error-msg">This field is required</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span *ngFor="let error of nameBackEndErrors" class="error-msg">{{error}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                            <br />
+                            <button type="submit" class="btn btn-success" [disabled]="!genreEditForm.valid || isSubmit"> Edit </button>
+                    </div>
+                </div>                
+            </form>            
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,30 @@
+<div class="panel">
+    <div class="panel-heading">
+        <h1>New Genre</h1>
+    </div>
+    <div class="panel-body">
+        <div class="jumbotron">
+            <form (ngSubmit)= "onFormSubmit()" method="POST" [formGroup]="genreCreateForm">
+                <div class="row">
+                    <div class="col-md-9">
+                        <label>Name: <span style="color: red">*</span></label><br />
+                        <input type="text" placeholder="name "class="form-control" formControlName="name" [ngClass]="{ 'is-invalid': (f.name.touched && f.name.errors) || nameBackEndErrors}"/>
+                        <div *ngIf="f.name.touched && f.name.errors" class="invalid-feedback">
+                            <div *ngIf="f.name.errors.required"><span class="error-msg">This field is required</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span *ngFor="let error of nameBackEndErrors" class="error-msg">{{error}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                            <br />
+                            <button type="submit" class="btn btn-success" [disabled]="!genreCreateForm.valid || isSubmit"> Create</button>
+                    </div>
+                </div>                
+            </form>            
+        </div>
+    </div>
+</div>
+
+

@@ -15,5 +15,9 @@ namespace BookSys.VeiwModel.ViewModels
 
         [Required]
         public int Copyright { get; set; }
+
+        [Required]
+        public long GenreID { get; set; }
+        public GenreVM Genre { get; set; }
     }
 }

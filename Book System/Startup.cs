@@ -38,6 +38,7 @@ namespace Book_System
                     ("BookSysContext")));
             //add services in BookSys.BLL
             services.AddScoped<BookService>();
+            services.AddScoped<GenreService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

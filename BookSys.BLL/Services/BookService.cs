@@ -2,6 +2,7 @@
 using BookSys.BLL.Helpers;
 using BookSys.DAL.Models;
 using BookSys.VeiwModel.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,7 +86,9 @@ namespace BookSys.BLL.Services
                 try
                 {
                     //SELECT * FROM BOOKS ORDER BY ID DESC 
-                    var books = context.Books.ToList().OrderByDescending(x => x.ID);
+                    var books = context.Books
+                        .Include(x => x.Genre)
+                        .ToList().OrderByDescending(x => x.ID);
                     var booksVm = books.Select(x => toViewModel.Book(x));
                         return booksVm;
                 }
@@ -104,7 +107,10 @@ namespace BookSys.BLL.Services
                 try
                 {
                     // SELECT * FROM books WHERE ID = 'id'
-                    var book = context.Books.Find(id);
+                    var book = context.Books
+                        .Include(x => x.Genre)
+                        .Where(x => x.ID == id)
+                        .FirstOrDefault();
                     BookVM bookVM = null;
                     if (book != null)
                         bookVM = toViewModel.Book(book);
@@ -134,6 +140,7 @@ namespace BookSys.BLL.Services
                         //update changes
                         bookTobeUpdated.Title = bookVM.Title;
                         bookTobeUpdated.Copyright = bookVM.Copyright;
+                        bookTobeUpdated.GenreID = bookVM.GenreID;
                         context.SaveChanges();
                         dbTransaction.Commit();
                         return new ResponseVM("updated", true, "Book");

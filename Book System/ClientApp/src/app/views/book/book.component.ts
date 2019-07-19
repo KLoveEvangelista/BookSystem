@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/models/book.model';
 import { BookService } from 'src/app/services/book.service';
 import { BookDataService } from 'src/app/dataservices/book.dataservice';
-import { TouchSequence } from 'selenium-webdriver';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { BookEditFormComponent } from './book-edit-form/book-edit-form.component';
+import { GenreDataService } from 'src/app/dataservices/genre.dataservice';
 
 @Component({
   selector: 'app-book',
@@ -17,6 +17,7 @@ export class BookComponent implements OnInit {
   constructor(
     private bookService: BookService,
     private bookDataService: BookDataService,
+    private genreDataService: GenreDataService,
     private dialog: MatDialog) 
     { }
     
@@ -24,6 +25,9 @@ export class BookComponent implements OnInit {
   ngOnInit() {
     // will trigger everytime BookDataService.refreshBooks is called
     this.bookDataService.books.subscribe( data => {
+      this.getBooks()
+    })
+    this.genreDataService.genres.subscribe( data => {
       this.getBooks()
     })
   }

@@ -27,13 +27,40 @@ namespace BookSys.DAL.Migrations
 
                     b.Property<int>("Copyright");
 
+                    b.Property<long>("GenreID");
+
                     b.Property<Guid>("MyGuid");
 
                     b.Property<string>("Title");
 
                     b.HasKey("ID");
 
+                    b.HasIndex("GenreID");
+
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("BookSys.DAL.Models.Genre", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("MyGuid");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Genres");
+                });
+
+            modelBuilder.Entity("BookSys.DAL.Models.Book", b =>
+                {
+                    b.HasOne("BookSys.DAL.Models.Genre", "Genre")
+                        .WithMany("Books")
+                        .HasForeignKey("GenreID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

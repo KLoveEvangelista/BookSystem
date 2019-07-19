@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BookService } from 'src/app/services/book.service';
 import { BookDataService } from 'src/app/dataservices/book.dataservice';
+import { Genre } from 'src/app/models/genre.model';
+import { GenreService } from 'src/app/services/genre.service';
+import { GenreDataService } from 'src/app/dataservices/genre.dataservice';
+import { of } from 'rxjs';
+import { DateAdapter, MatDialogConfig, MatDialog } from '@angular/material';
+import { GenreComponent } from '../../genre/genre.component';
 
 @Component({
   selector: 'app-book-add-form',
@@ -14,20 +20,29 @@ export class BookAddFormComponent implements OnInit {
 
   titleBackEndErrors: string[];
   copyrightBackEndErrors: string[];
+
+  genresList: Genre[]
   
   constructor(
     private bookService: BookService,
-    private bookDataService: BookDataService
+    private bookDataService: BookDataService,
+    private genreService: GenreService,
+    private genreDataService: GenreDataService,
+    private dialog: MatDialog
   ) { 
     this.bookCreateForm= new FormGroup({
       title: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      copyright: new FormControl('', [Validators.required, Validators.maxLength(4)])
+      copyright: new FormControl('', [Validators.required, Validators.maxLength(4)]),
+      genreID: new FormControl ('', [Validators.required]),
+      genreSelect: new FormControl('', [Validators.required])
     })
        
   }
 
   ngOnInit() {
-
+    this.genreDataService.genreSource.subscribe(data => {
+      this.getGenreLists();
+    })
   }
   get f(){return this.bookCreateForm.controls;}
 
@@ -69,4 +84,37 @@ export class BookAddFormComponent implements OnInit {
       this.isSubmit=false;
     }
   }
+
+  async getGenreLists(){
+    try {
+      this.genresList = await this.genreService.getAll().toPromise();
+      //console.log(this.genresList)
+    } catch (error) {
+      console.log(error)
+      
+    }
+  }
+
+  selectGenre($event){
+    let genre = this.bookCreateForm.value.genreSelect;
+    if(genre.length > 2){
+      if($event.timeStamp > 200){
+        let selectedGenre = this.genresList.find(data=> data.name == genre);
+        //console.log(genre)
+       // console.log(selectedGenre)
+        if(selectedGenre)
+          this.bookCreateForm.controls['genreID'].setValue(selectedGenre.id)
+      }
+    }
+  }
+
+  openGenreDialog(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '600px';
+    dialogConfig.height= '600px';
+    this.dialog.open(GenreComponent, dialogConfig);
+  }
+  /*test(){
+    console.log(this.bookCreateForm.value)
+  }*/
 }

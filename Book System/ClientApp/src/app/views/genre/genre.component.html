@@ -1,0 +1,28 @@
+<app-genre-add-form></app-genre-add-form>
+
+<p>genre works!</p>
+
+<h1>Genre</h1>
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <td style="width: 60%">Name</td>
+            <td style="width: 30%"></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let genre of genres">
+            <td style="width: 60%">{{genre.name}}</td>
+            <td style="width: 30%">
+                <div class="row">
+                    <button class="col-md-5 btn btn-success m-1" (click)="update(genre)" data-toggle="tooltip" data-placement="bottom" title="Update genre" >
+                        <i class="material-icons">update</i>
+                    </button>
+                    <button class="col-md-5 btn btn-danger m-1" (click)="delete(genre.id)" data-toggle="tooltip" data-placement="bottom" title="Delete genre">
+                        <i class="material-icons">delete</i></button>
+                </div>
+            </td>
+            
+        </tr>
+    </tbody>
+</table>

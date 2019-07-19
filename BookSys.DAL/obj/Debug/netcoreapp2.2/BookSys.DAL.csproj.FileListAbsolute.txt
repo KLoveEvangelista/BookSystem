@@ -3,9 +3,9 @@ C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.DAL\bin\Debug\net
 C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.DAL\obj\Debug\netcoreapp2.2\BookSys.DAL.csproj.CoreCompileInputs.cache
 C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.DAL\obj\Debug\netcoreapp2.2\BookSys.DAL.AssemblyInfoInputs.cache
 C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.DAL\obj\Debug\netcoreapp2.2\BookSys.DAL.AssemblyInfo.cs
-C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.DAL\obj\Debug\netcoreapp2.2\BookSys.DAL.csprojAssemblyReference.cache
 C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.DAL\bin\Debug\netcoreapp2.2\BookSys.DAL.runtimeconfig.json
 C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.DAL\bin\Debug\netcoreapp2.2\BookSys.DAL.runtimeconfig.dev.json
 C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.DAL\bin\Debug\netcoreapp2.2\BookSys.DAL.pdb
 C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.DAL\obj\Debug\netcoreapp2.2\BookSys.DAL.dll
 C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.DAL\obj\Debug\netcoreapp2.2\BookSys.DAL.pdb
+C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.DAL\obj\Debug\netcoreapp2.2\BookSys.DAL.csprojAssemblyReference.cache
