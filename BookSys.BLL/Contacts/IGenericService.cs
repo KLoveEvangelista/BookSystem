@@ -8,7 +8,7 @@ namespace BookSys.BLL.Contacts
     public interface IGenericService<TVM, TType> where TVM : class where TType : IConvertible
     {
         IEnumerable<TVM> GetAll();
-        TVM GetSingleBy(long id);
+        TVM GetSingleBy(TType id);
         ResponseVM Create(TVM entity);
         ResponseVM Delete(TType guid);
         ResponseVM Update(TVM entity);

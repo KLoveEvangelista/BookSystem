@@ -3,6 +3,7 @@ using BookSys.DAL.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -36,9 +37,23 @@ namespace Book_System
                     options.UseSqlServer
                     (Configuration.GetConnectionString
                     ("BookSysContext")));
+
+            services.AddDefaultIdentity<User>()
+                .AddEntityFrameworkStores<BookSysContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 5;
+            });
+
             //add services in BookSys.BLL
             services.AddScoped<BookService>();
             services.AddScoped<GenreService>();
+            services.AddScoped<UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

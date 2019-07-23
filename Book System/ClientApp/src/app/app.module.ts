@@ -19,6 +19,7 @@ import {MatDialogModule} from '@angular/material';
 import { GenreComponent } from './views/genre/genre.component';
 import { GenreAddFormComponent } from './views/genre/genre-add-form/genre-add-form.component';
 import { GenreEditFormComponent } from './views/genre/genre-edit-form/genre-edit-form.component';
+import { RegisterComponent } from './views/auth/register/register.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { GenreEditFormComponent } from './views/genre/genre-edit-form/genre-edit
     BookEditFormComponent,
     GenreComponent,
     GenreAddFormComponent,
-    GenreEditFormComponent
+    GenreEditFormComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

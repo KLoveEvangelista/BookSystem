@@ -7,6 +7,7 @@ import { FetchDataComponent } from './views/fetch-data/fetch-data.component';
 import { MySampleComponent } from './views/my-sample/my-sample.component';
 import { BookComponent } from './views/book/book.component';
 import { GenreComponent } from './views/genre/genre.component';
+import { RegisterComponent } from './views/auth/register/register.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'fetch-data', component: FetchDataComponent},
   { path: 'my-sample', component: MySampleComponent},
   { path: 'book', component: BookComponent},
-  { path: 'genre', component: GenreComponent}
+  { path: 'genre', component: GenreComponent},
+  { path: 'register', component: RegisterComponent}
 ]
 
 @NgModule({
