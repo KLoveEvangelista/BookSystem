@@ -26,7 +26,7 @@
                             <span *ngFor="let error of passwordBackEndErrors" style="color: red; font-size: 10pt;">{{error}}</span>
                         </div>
                     </div>
-                    <!--div class="col-md-4">
+                    <div class="col-md-4">
                         <label for="role">Role: <span style="color: red">*</span></label> <br />
                         <select type="text" class="form-control" id="role" formControlName="role" [ngClass]="{ 'is-invalid': (f.role.touched && f.role.errors) || roleBackEndErrors }">
                             <option value="" selected disabled>Select role</option>
@@ -39,7 +39,7 @@
                         <div>
                             <span *ngFor="let error of roleBackEndErrors" style="color: red; font-size: 10pt;">{{error}}</span>
                         </div>
-                    </div-->
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BookSys.BLL.Contacts;
+using BookSys.BLL.Contracts;
 using BookSys.BLL.Services;
 using BookSys.VeiwModel.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -46,10 +46,10 @@ namespace Book_System.Controllers
         }
         
         //api/Genre/getSingleBy/id
-        [HttpGet("[action]/{id}")]
-        public GenreVM GetSingleBy(long id)
+        [HttpGet("[action]/{guid}")]
+        public GenreVM GetSingleBy(string guid)
         {
-            return genreService.GetSingleBy(id);
+            return genreService.GetSingleBy(guid);
 
         }
 

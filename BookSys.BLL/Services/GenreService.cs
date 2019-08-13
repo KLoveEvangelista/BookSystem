@@ -1,6 +1,6 @@
 ﻿
 
-using BookSys.BLL.Contacts;
+using BookSys.BLL.Contracts;
 using BookSys.BLL.Helpers;
 using BookSys.DAL.Models;
 using BookSys.VeiwModel.ViewModels;
@@ -98,14 +98,14 @@ namespace BookSys.BLL.Services
             }
         }
 
-        public GenreVM GetSingleBy(long id)
+        public GenreVM GetSingleBy(string guid)
         {
             using (context)
             {
                 try
                 {
                     // SELECT * FROM books WHERE ID = 'id'
-                    var genre = context.Genres.Find(id);
+                    var genre = context.Genres.Where(x => x.MyGuid.ToString() == guid).FirstOrDefault();
                     GenreVM genreVM = null;
                     if (genre != null)
                         genreVM = toViewModel.Genre(genre);
@@ -147,6 +147,50 @@ namespace BookSys.BLL.Services
                         throw;
                     }
                 }
+            }
+        }
+        public PagingResponse<GenreVM> GetDataServerSide(PagingRequest paging)
+        {
+            using (context)
+            {
+
+                var pagingResponse = new PagingResponse<GenreVM>()
+                {
+                    // counts how many times the user draws data
+                    Draw = paging.Draw
+                };
+                // initialized query
+                IEnumerable<Genre> query = null;
+                // search if user provided a search value, i.e. search value is not empty
+                if (!string.IsNullOrEmpty(paging.Search.Value))
+                {
+                    // search based from the search value
+                    query = context.Genres.Where(v => v.Name.ToString().ToLower().Contains(paging.Search.Value.ToString().ToLower()));
+                }
+                else
+                {
+                    // selects all from table
+                    query = context.Genres;
+                }
+                // total records from query
+                var recordsTotal = query.Count();
+                // orders the data by the sorting selected by the user
+                // used ternary operator to determine if ascending or descending
+                var colOrder = paging.Order[0];
+                switch (colOrder.Column)
+                {
+                    case 0:
+                        query = colOrder.Dir == "asc" ? query.OrderBy(v => v.Name) : query.OrderByDescending(v => v.Name);
+                        break;
+                }
+
+                var taken = query.Skip(paging.Start).Take(paging.Length).ToArray();
+                // converts model(query) into viewmodel then assigns it to response which is displayed as "data"
+                pagingResponse.Reponse = taken.Select(x => toViewModel.Genre(x));
+                pagingResponse.RecordsTotal = recordsTotal;
+                pagingResponse.RecordsFiltered = recordsTotal;
+
+                return pagingResponse;
             }
         }
     }

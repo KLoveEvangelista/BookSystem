@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BookSys.BLL.Contacts;
+using BookSys.BLL.Contracts;
 using BookSys.BLL.Services;
 using BookSys.VeiwModel.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -46,10 +46,10 @@ namespace Book_System.Controllers
         }
         
         //api/Book/getSingleBy/id
-        [HttpGet("[action]/{id}")]
-        public BookVM GetSingleBy(long id)
+        [HttpGet("[action]/{guid}")]
+        public BookVM GetSingleBy(string guid)
         {
-            return bookService.GetSingleBy(id);
+            return bookService.GetSingleBy(guid);
 
         }
 
@@ -60,6 +60,13 @@ namespace Book_System.Controllers
             if (!ModelState.IsValid)
                 return BadRequest("Somehing went wrong");
             return bookService.Update(bookVM);
+        }
+
+
+        [HttpPost("[action]")]
+        public ActionResult<PagingResponse<BookVM>> GetDataServerSide([FromBody]PagingRequest paging)
+        {
+            return bookService.GetDataServerSide(paging);
         }
     }
 } 

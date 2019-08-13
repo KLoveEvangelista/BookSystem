@@ -1,4 +1,4 @@
-﻿using BookSys.BLL.Contacts;
+﻿using BookSys.BLL.Contracts;
 using BookSys.BLL.Helpers;
 using BookSys.DAL.Models;
 using BookSys.VeiwModel.ViewModels;
@@ -31,8 +31,25 @@ namespace BookSys.BLL.Services
                     try
                     {
                         bookVM.MyGuid = Guid.NewGuid();
-                        context.Books.Add(toModel.Book(bookVM));
+                        var bookSaved = context.Books.Add(toModel.Book(bookVM)).Entity;
                         context.SaveChanges();
+
+                        foreach(var authID in bookVM.AuthorIdList)
+                        {
+                            //validate existence of author
+                            var author = context.Authors.Find(authID);
+                            if (author == null)
+                                return new ResponseVM("create", false, "Book", "Author does not exists");
+                            var bookAuthor = new BookAuthor
+                            {
+                                AuthorID = authID,
+                                BookID = bookSaved.ID,
+                                AuthorFullName = toViewModel.ToFullName(author.FirstName, author.MiddleName, author.LastName)
+                            };
+
+                            context.BookAuthors.Add(bookAuthor);
+                            context.SaveChanges();
+                        }
 
                         //commit changes to db
                         dbTransaction.Commit();
@@ -62,6 +79,10 @@ namespace BookSys.BLL.Services
                             return new ResponseVM ("deleted", false, "Book", ResponseVM.DOES_NOT_EXIST);
                         //delete
 
+                        var removeFromBookAuthors = context.BookAuthors.Where(x => x.BookID == bookTobeDeleted.ID);
+                        context.BookAuthors.RemoveRange(removeFromBookAuthors);
+                        context.SaveChanges();
+
                         context.Books.Remove(bookTobeDeleted);
                         context.SaveChanges();
 
@@ -86,9 +107,13 @@ namespace BookSys.BLL.Services
                 try
                 {
                     //SELECT * FROM BOOKS ORDER BY ID DESC 
+                    //LinQ EagerLoading
                     var books = context.Books
                         .Include(x => x.Genre)
-                        .ToList().OrderByDescending(x => x.ID);
+                        .Include(x => x.BookAuthors)
+                            .ThenInclude(x => x.Author)
+                        .ToList()
+                        .OrderByDescending(x => x.ID);
                     var booksVm = books.Select(x => toViewModel.Book(x));
                         return booksVm;
                 }
@@ -100,7 +125,7 @@ namespace BookSys.BLL.Services
             }
         }
 
-        public BookVM GetSingleBy(long id)
+        public BookVM GetSingleBy(string guid)
         {
             using (context)
             {
@@ -109,7 +134,7 @@ namespace BookSys.BLL.Services
                     // SELECT * FROM books WHERE ID = 'id'
                     var book = context.Books
                         .Include(x => x.Genre)
-                        .Where(x => x.ID == id)
+                        .Where(x => x.MyGuid.ToString() == guid)
                         .FirstOrDefault();
                     BookVM bookVM = null;
                     if (book != null)
@@ -142,6 +167,30 @@ namespace BookSys.BLL.Services
                         bookTobeUpdated.Copyright = bookVM.Copyright;
                         bookTobeUpdated.GenreID = bookVM.GenreID;
                         context.SaveChanges();
+
+                        //came from delete
+                        var removeFromBookAuthors = context.BookAuthors.Where(x => x.BookID == bookTobeUpdated.ID);
+                        context.BookAuthors.RemoveRange(removeFromBookAuthors);
+                        context.SaveChanges();
+
+                        //from create, saves to assoc table
+                        foreach (var authID in bookVM.AuthorIdList)
+                        {
+                            //validate existence of author
+                            var author = context.Authors.Find(authID);
+                            if (author == null)
+                                return new ResponseVM("create", false, "Book", "Author does not exists");
+                            var bookAuthor = new BookAuthor
+                            {
+                                AuthorID = authID,
+                                BookID = bookTobeUpdated.ID,
+                                AuthorFullName = toViewModel.ToFullName(author.FirstName, author.MiddleName, author.LastName)
+                            };
+
+                            context.BookAuthors.Add(bookAuthor);
+                            context.SaveChanges();
+                        }
+
                         dbTransaction.Commit();
                         return new ResponseVM("updated", true, "Book");
                     }
@@ -154,6 +203,63 @@ namespace BookSys.BLL.Services
                         throw;
                     }
                 }
+            }
+        }
+        public PagingResponse<BookVM> GetDataServerSide(PagingRequest paging)
+        {
+            using (context)
+            {
+                var pagingResponse = new PagingResponse<BookVM>()
+                {
+                    // counts how many times the user draws data
+                    Draw = paging.Draw
+                };
+                // initialized query
+                IEnumerable<Book> query = null;
+                // search if user provided a search value, i.e. search value is not empty
+                if (!string.IsNullOrEmpty(paging.Search.Value))
+                {
+                    // search based from the search value     
+                    query = context.Books.Include(x => x.Genre)
+                                         .Include(x => x.BookAuthors)
+                                         .ThenInclude(x => x.Author)
+                                         .Where(v => v.Title.ToString().ToLower().Contains(paging.Search.Value.ToLower()) ||
+                                                     v.Copyright.ToString().ToLower().Contains(paging.Search.Value.ToLower()) ||
+                                                     v.Genre.Name.ToString().ToLower().Contains(paging.Search.Value.ToLower()) ||
+                                                     v.BookAuthors.Any(x => x.AuthorFullName.ToLower().Contains(paging.Search.Value.ToLower())));
+                }
+                else
+                {
+                    // selects all from table
+                    query = context.Books
+                                        .Include(x => x.Genre)
+                                        .Include(x => x.BookAuthors)
+                                        .ThenInclude(x => x.Author);
+                }
+                // total records from query
+                var recordsTotal = query.Count();
+                // orders the data by the sorting selected by the user
+                // used ternary operator to determine if ascending or descending
+                var colOrder = paging.Order[0];
+                switch (colOrder.Column)
+                {
+                    case 0:
+                        query = colOrder.Dir == "asc" ? query.OrderBy(v => v.Title) : query.OrderByDescending(v => v.Title);
+                        break;
+                    case 1:
+                        query = colOrder.Dir == "asc" ? query.OrderBy(b => b.Copyright) : query.OrderByDescending(b => b.Copyright);
+                        break;
+                    case 2:
+                        query = colOrder.Dir == "asc" ? query.OrderBy(b => b.Genre.Name) : query.OrderByDescending(b => b.Genre.Name);
+                        break;
+                }
+                var taken = query.Skip(paging.Start).Take(paging.Length).ToArray();
+                // converts model(query) into viewmodel then assigns it to response which is displayed as "data"
+                pagingResponse.Reponse = taken.Select(x => toViewModel.Book(x));
+                pagingResponse.RecordsTotal = recordsTotal;
+                pagingResponse.RecordsFiltered = recordsTotal;
+
+                return pagingResponse;
             }
         }
     }

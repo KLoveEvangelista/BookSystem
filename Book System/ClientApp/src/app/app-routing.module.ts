@@ -8,15 +8,18 @@ import { MySampleComponent } from './views/my-sample/my-sample.component';
 import { BookComponent } from './views/book/book.component';
 import { GenreComponent } from './views/genre/genre.component';
 import { RegisterComponent } from './views/auth/register/register.component';
+import { AuthGuard } from './guard/auth.guard';
+import { ForbiddenComponent } from './views/auth/forbidden/forbidden.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
-  { path: 'counter', component: CounterComponent},
-  { path: 'fetch-data', component: FetchDataComponent},
-  { path: 'my-sample', component: MySampleComponent},
-  { path: 'book', component: BookComponent},
-  { path: 'genre', component: GenreComponent},
-  { path: 'register', component: RegisterComponent}
+  { path: 'counter', component: CounterComponent, canActivate:[AuthGuard]},
+  { path: 'fetch-data', component: FetchDataComponent, canActivate:[AuthGuard]},
+  { path: 'my-sample', component: MySampleComponent, canActivate:[AuthGuard]},
+  { path: 'book', component: BookComponent, canActivate:[AuthGuard]},
+  { path: 'genre', component: GenreComponent, canActivate:[AuthGuard]},
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard], data: {permittedRoles: ['Admin']}},
+  { path: 'forbidden', component: ForbiddenComponent}
 ]
 
 @NgModule({

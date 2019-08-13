@@ -23,5 +23,8 @@ namespace BookSys.VeiwModel.ViewModels
 
         [Required]
         public string LastName { get; set; }
+
+        [Required]
+        public string Role { get; set; }
     }
 }

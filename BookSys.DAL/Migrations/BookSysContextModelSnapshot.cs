@@ -19,6 +19,25 @@ namespace BookSys.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("BookSys.DAL.Models.Author", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("Middlename");
+
+                    b.Property<Guid>("MyGuid");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Authors");
+                });
+
             modelBuilder.Entity("BookSys.DAL.Models.Book", b =>
                 {
                     b.Property<long>("ID")
@@ -38,6 +57,27 @@ namespace BookSys.DAL.Migrations
                     b.HasIndex("GenreID");
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("BookSys.DAL.Models.BookAuthor", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AuthorFullName");
+
+                    b.Property<long>("AuthorID");
+
+                    b.Property<long>("BookID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("AuthorID");
+
+                    b.HasIndex("BookID");
+
+                    b.ToTable("BookAuthors");
                 });
 
             modelBuilder.Entity("BookSys.DAL.Models.Genre", b =>
@@ -243,6 +283,19 @@ namespace BookSys.DAL.Migrations
                     b.HasOne("BookSys.DAL.Models.Genre", "Genre")
                         .WithMany("Books")
                         .HasForeignKey("GenreID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BookSys.DAL.Models.BookAuthor", b =>
+                {
+                    b.HasOne("BookSys.DAL.Models.Author", "Author")
+                        .WithMany("BookAuthors")
+                        .HasForeignKey("AuthorID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BookSys.DAL.Models.Book", "Book")
+                        .WithMany("BookAuthors")
+                        .HasForeignKey("BookID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -39,4 +39,9 @@ export class BookService {
   delete(id): Observable<MyResponse>{
     return this.http.delete<MyResponse>(this.bookApi + 'Delete/' + String (id));
   }
+
+  getDataServerSide(dtParams: any): Observable<any> {  
+    return this.http.post(`${this.bookApi}GetDataServerSide`, dtParams);          
+  }
+  
 }

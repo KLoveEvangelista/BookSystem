@@ -6,4 +6,3 @@ C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.VeiwModel\obj\Deb
 C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.VeiwModel\obj\Debug\netcoreapp2.2\BookSys.VeiwModel.AssemblyInfo.cs
 C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.VeiwModel\obj\Debug\netcoreapp2.2\BookSys.VeiwModel.dll
 C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.VeiwModel\obj\Debug\netcoreapp2.2\BookSys.VeiwModel.pdb
-C:\Users\BloodMage\source\repos\BookSystem\Book System\BookSys.VeiwModel\obj\Debug\netcoreapp2.2\BookSys.VeiwModel.csprojAssemblyReference.cache

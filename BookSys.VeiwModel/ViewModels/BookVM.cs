@@ -19,5 +19,9 @@ namespace BookSys.VeiwModel.ViewModels
         [Required]
         public long GenreID { get; set; }
         public GenreVM Genre { get; set; }
+
+        public List<AuthorVM> Authors { get; set; }
+        public IEnumerable<long> AuthorIdList { get; set; }
+
     }
 }
